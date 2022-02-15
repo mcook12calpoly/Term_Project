@@ -23,7 +23,9 @@ For this term project, a 2.5 axis plotting machine will be contructed using a pi
 ---
 ### Project Sketch
 
-![projectsketch](/docs/sketch.png)
+![projectsketch1](/docs/sketch1.png)
+![projectsketch2](/docs/sketch2.png)
+![projectsketch3](/docs/sketch3.png)
 
 
 ---
