@@ -16,7 +16,7 @@ For this term project, a 2.5 axis plotting machine will be contructed using a pi
 |  1   | Black Sharpie&trade;  | STAPLES&trade;        |   $1.29   |
 |  1   | Chassis for servo/pen | 3D Printer            |     -     |
 |  1   | Limit Switch          | Already Owned         |     -     |
-|  2   | 3" Hobby Wheel        | Amazon&trade;         |   $8.78   |
+|  2   | 3" Wheel              | 3D Printer            |     -     |
 |  10  | 8x22x7 Wellgo Bearing | Amazon&trade;         |   $9.95   |
 
 
