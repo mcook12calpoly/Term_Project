@@ -23,7 +23,7 @@ When the movement has been completed, the encoder task sends a flag to the user/
 The figure below shows the FSM diagram for the user/main task.
 This task waits for the user to input a file to read G-Code from.
 Once a file has been specified, it reads a single line. If share_d is true, this indicates that the previous movement has completed,
-and the current line is stored in share variable share_g for use in "G-Code to Position" task.
+and the current line is stored in share variable share_g for use in "G-Code to Position" task. At any state, if the user presses the stop key, the task returns to state 0, waiting for data.
 @image html Main_FSM.png
 
 @subsection G_Code G-Code to Position Task FSM

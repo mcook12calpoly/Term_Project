@@ -95,7 +95,7 @@ Task Diagram</h2>
 </div>
 <h2><a class="anchor" id="User_Task"></a>
 User/Main Task FSM</h2>
-<p >The figure below shows the FSM diagram for the user/main task. This task waits for the user to input a file to read G-Code from. Once a file has been specified, it reads a single line. If share_d is true, this indicates that the previous movement has completed, and the current line is stored in share variable share_g for use in "G-Code to Position" task. </p><div class="image">
+<p >The figure below shows the FSM diagram for the user/main task. This task waits for the user to input a file to read G-Code from. Once a file has been specified, it reads a single line. If share_d is true, this indicates that the previous movement has completed, and the current line is stored in share variable share_g for use in "G-Code to Position" task. At any state, if the user presses the stop key, the task returns to state 0, waiting for data. </p><div class="image">
 <img src="Main_FSM.png" alt=""/>
 </div>
 <h2><a class="anchor" id="G_Code"></a>
