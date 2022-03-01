@@ -51,7 +51,8 @@ if __name__ == "__main__":
     driver.set_duty_cycle(0)
     time.sleep_ms(1000)
     driver.set_duty_cycle(50)
-    
+    time.sleep_ms(2000)
+    driver.set_duty_cycle(0)
 
 
 
