@@ -35,7 +35,7 @@ class ServoDriver:
                cycle of the voltage sent to the motor 
         '''
         
-        
+        ##Convert 0-100 PWM values to 1-2ms pulse widths
         OldRange = (100 - 0)
         NewRange = (10 - 5)
         position = (((level - 0) * NewRange) / OldRange) + 5
