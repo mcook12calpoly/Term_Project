@@ -3,24 +3,24 @@ import time
 
 class ServoDriver:
     '''! 
-    This class implements a motor driver for an ME405 kit. 
+    This class implements a servo driver for an 3-wire hobby servo. 
     '''
 
     def __init__ (self, inpin, timer):
         '''! 
-        Creates a motor driver by initializing GPIO
+        Creates a servo driver by initializing GPIO
         pins 
-        @param in1pin IN1 pin 
+        @param inpin IN pin 
         @param timer Timer pin for PWM
         '''
         
-        ## Reference for pin object for B10
+        ## Reference for pin object for B3
         self.pinPB3 = pyb.Pin (inpin, pyb.Pin.OUT_PP)
         
         ## Reference for timer object tim2
         self.tim2 = pyb.Timer(timer, freq=50)
         
-        ## Reference for timer 2 channel 1
+        ## Reference for timer 2 channel 2
         self.IN1 = self.tim2.channel(2, pyb.Timer.PWM, pin=self.pinPB3)
         
         #print ('Creating a servo driver')
@@ -28,9 +28,8 @@ class ServoDriver:
     def set_duty_cycle (self, level):
         '''!
         This method sets the duty cycle to be sent
-        to the servo to the given level. Positive values
-        cause torque in one direction, negative values
-        in the opposite direction.
+        to the servo to the given level. A 1ms pulse moves the servo
+        to 0 degrees while a 2ms pulse sets it to 180 degrees.
         @param level A signed integer holding the duty
                cycle of the voltage sent to the motor 
         '''
@@ -50,10 +49,6 @@ class ServoDriver:
 if __name__ == "__main__":
     driver = ServoDriver(pyb.Pin.board.PB3, 2)
     driver.set_duty_cycle(0)
-    #time.sleep_ms(1000)
-    #driver.set_duty_cycle(100)
-    #time.sleep_ms(1000)
-    #driver.set_duty_cycle(50)
 
 
 
