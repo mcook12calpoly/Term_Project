@@ -49,6 +49,9 @@ class ServoDriver:
 if __name__ == "__main__":
     driver = ServoDriver(pyb.Pin.board.PB3, 2)
     driver.set_duty_cycle(0)
+    time.sleep_ms(1000)
+    driver.set_duty_cycle(50)
+    
 
 
 
