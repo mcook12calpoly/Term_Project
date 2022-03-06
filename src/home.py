@@ -10,7 +10,7 @@ class Home:
     
     def goHome (self):
         while (self.switch.state() == 1):
-            self.motor.set_duty_cycle(75)
+            self.motor.set_duty_cycle(55)
         self.motor.set_duty_cycle(0)
         print("duty set to 0")
         
