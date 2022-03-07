@@ -38,7 +38,7 @@ class Pen:
         s1 = ServoDriver(pyb.Pin.board.PB3, 2)
         
         #
-        s1.set_duty_cycle(50)
+        s1.set_duty_cycle(70)
     
 
 
