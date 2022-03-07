@@ -65,6 +65,9 @@ class MotorDriver:
         elif (level < 0):
             self.IN1.pulse_width_percent(abs(level))
             self.IN2.pulse_width_percent(0)
+        elif (level == 0):
+            self.IN1.pulse_width_percent(0)
+            self.IN2.pulse_width_percent(0)
             
         #print ('Setting duty cycle to ' + str (level))
 
