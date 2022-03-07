@@ -2,6 +2,7 @@ import gc
 import pyb
 import cotask
 import task_share
+import time
 from switch import Switch
 from encoder import Encoder
 from motordriver import MotorDriver
@@ -23,7 +24,7 @@ def task_encoder_update():
         
 def task_move():
     while True:
-        controller.moveto(15000, 50, 300, 20000, 75, 350)
+        controller.moveto(15000, 50, 20000, 75)
         
         yield (0)
 
@@ -57,6 +58,8 @@ if __name__ == "__main__":
     
     del enc_screw
     del enc_wheel
+    
+    time.sleep_ms(500)
     
     enc_wheel = Encoder(pyb.Pin.board.PB6, pyb.Pin.board.PB7, 4)
     enc_screw = Encoder(pyb.Pin.board.PC6, pyb.Pin.board.PC7, 8)

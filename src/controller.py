@@ -8,7 +8,7 @@ class Controller:
         self.motor_r = motor_r
         self.encoder_r = encoder_r
         
-    def moveto (self, target_theta, speed_theta, theta_threshold, target_r, speed_r, r_threshold):
+    def moveto (self, target_theta, speed_theta, target_r, speed_r, theta_threshold = 350, r_threshold = 350):
         
         
         if (abs(target_theta - self.encoder_theta.get()) < theta_threshold):
@@ -24,11 +24,11 @@ class Controller:
     
         if (abs(target_r - self.encoder_r.get()) < r_threshold):
             self.motor_r.set_duty_cycle(0)
-            print("WITHIN THRESHOLD")
+            #print("WITHIN THRESHOLD")
             
         elif (self.encoder_r.get() > target_r):
             self.motor_r.set_duty_cycle(speed_r)
-            print("still good", self.encoder_r.get())
+            #print("still good", self.encoder_r.get())
             
         elif (self.encoder_r.get() < target_r):
             self.motor_r.set_duty_cycle(-speed_r)
