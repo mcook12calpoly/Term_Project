@@ -59,13 +59,13 @@ class Encoder:
         half of the period, this means the timer has overflowed. To prevent the
         value from resetting, the period is added or subtracted from the delta
         value.
-        '''
-        
+        '''   
         new_tick=self.tim4.counter()
-        
+            
         # set delta to difference in encoder value
         ## Delta variable defined by current position minus previous position
         self.delta=new_tick-self.old_tick
+        
         self.old_tick=new_tick
         
         # if delta exceeds half period, add or subtract period to account for overflow
@@ -74,7 +74,6 @@ class Encoder:
                 self.delta -= self.per
             else:
                 self.delta += self.per
-
         self.position += self.delta
         
     def read(self):
@@ -91,6 +90,7 @@ class Encoder:
         '''
         
         self.position = 0
+
         
     
     
