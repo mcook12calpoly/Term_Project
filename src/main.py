@@ -19,8 +19,7 @@ def task_encoder_update():
         s_enc_wheel.put(-enc_wheel.read())    
         s_enc_screw.put(enc_screw.read())
 
-        print("Wheel:", s_enc_wheel.get(), "Screw:", s_enc_screw.get())
-        print("stuck in encoder")
+        #print("Wheel:", s_enc_wheel.get(), "Screw:", s_enc_screw.get())
         yield(0)
         
 def task_move():
@@ -30,8 +29,8 @@ def task_move():
     setpoint_pen = 0
     
     while True:
-        print("Theta setpoint:", setpoint_theta, "R setpoint:", setpoint_r, "Pen setpoint:", setpoint_pen)
-        print("done flag:", s_done.get())
+        #print("Theta setpoint:", setpoint_theta, "R setpoint:", setpoint_r, "Pen setpoint:", setpoint_pen)
+        #print("done flag:", s_done.get())
         
         if s_done.get() == 0:
             
@@ -50,21 +49,37 @@ def task_move():
 
         yield(0)
         
-def task_serial_read():
+def task_read():
+    
+    values_split = []
+    file = open('test.txt', 'r')
+    values = file.read()
+    file.close()
+    values = values.replace('(','')
+    values = values.replace(')','')
+    values = values.replace(' ','')
+    
+    values = values.splitlines()
+    
+    for i in values:
+        values_split.append(i.rsplit(','))
+    
+    print(values_split)
     
     while True:
         
         if not q_setpoints_theta.full():
-            if nb_in.any():
-                values = nb_in.get()
-                q_setpoints_theta.put(values[2])
-                q_setpoints_r.put(values[1])
-                q_setpoints_pen.put(values[3])
-                #print("serial:",values)
+            
+            if values_split:
+                q_setpoints_theta.put(float(values_split[0][1]))
+                q_setpoints_r.put(float(values_split[0][0]))
+                q_setpoints_pen.put(int(values_split[0][2]))
+                values_split.pop(0)
             
         yield(0)
         
 if __name__ == "__main__":
+    
     
     # creating shares
     s_enc_screw = task_share.Share ('i', thread_protect = False, name = "screw encoder")
@@ -121,8 +136,8 @@ if __name__ == "__main__":
     controller = Controller(motor_wheel, s_enc_wheel, motor_screw, s_enc_screw, pen, s_done)
     
     # creating nb input object
-    nb_in = NB_Input (USB_VCP (), echo=True)
-
+    nb_in = NB_Input (pyb.USB_VCP (), echo=True)
+    
     home = Home()
     home.goHome(motor_screw, enc_screw, switch_screw, 0, 75)
     home.goHome(motor_wheel, enc_wheel, switch_wheel, 1, 50)
@@ -145,11 +160,12 @@ if __name__ == "__main__":
     task2 = cotask.Task (task_move, name = 'move', priority = 2, 
                          period = 50, profile = True, trace = False)
     
-    task3 = cotask.Task (task_serial_read, name = 'serial read', priority = 3, 
+    task3 = cotask.Task (task_read, name = 'serial read', priority = 3, 
                          period = 40, profile = True, trace = False)
     
     cotask.task_list.append (task1)
     cotask.task_list.append (task2)
+    cotask.task_list.append (task3)
 
     gc.collect ()
 
