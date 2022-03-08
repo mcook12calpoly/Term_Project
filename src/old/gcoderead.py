@@ -1,9 +1,12 @@
 import math
+import matplotlib.pyplot as plot
 
 if __name__ == "__main__":
         with open('gcode.csv.ngc') as gcode:
             gcomm=[0,0,0,0,0,0]
             end=[]
+            cartxlist=[]
+            cartylist=[]
             xprev=0
             yprev=0
             gprev='0'
@@ -68,40 +71,34 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
+                                x=data[0]*math.cos((math.pi/180)*data[1])
+                                y=data[0]*math.sin((math.pi/180)*data[1])
+                                cartxlist.append((x))
+                                cartylist.append((y))
                                 end.append(data)
                             gprev='00'
                             
                         elif(gcomm[0]=='01'):
-                            print('next line')
-                            setpts=[]
                             x = float(gcomm[1])
                             y = float(gcomm[2])
                             z = float(gcomm[3])
-                            print(x)
-                            print(y)
-                            print(z)
-                            div = 100
-                            print('xprev',xprev)
+                            div = 10
                             xdif = (x-xprev)
                             ydif = (y-yprev)
-                            print('xdif',xdif)
-                            print('ydif',ydif)
                             i=0
                             xinc = xdif/div
                             yinc = ydif/div
-                            print('xinc',xinc)
-                            print('yinc',yinc)
                             while(i < div):
-                                xout = xinc + (xinc * i)
-                                yout = yinc + (yinc * i)
+                                xout = xprev + xinc + (xinc * i)
+                                yout = yprev + yinc + (yinc * i)
                                 if(gprev=='00'):
                                     r=math.sqrt((x*x)+(y*y))
                                     theta=math.atan(y/x)*(180/math.pi)
                                     gprev='01'
                                     break
-                                elif(xout==0.0):
+                                elif(xdif==0.0):
                                     r=math.sqrt((xprev*xprev)+(yout*yout))
-                                    theta=math.atan(yout/xprev)*(180/math.pi)
+                                    theta=math.atan(yout/x)*(180/math.pi)
                                 else:
                                     r=math.sqrt((xout*xout)+(yout*yout))
                                     theta=math.atan(yout/xout)*(180/math.pi)
@@ -112,7 +109,6 @@ if __name__ == "__main__":
                                 i+=1
                             r=math.sqrt((x*x)+(y*y))
                             theta=math.atan(y/x)*(180/math.pi)
-                            print('theta',theta)
                             if(z > 0):
                                 setpts.append((r,theta,0))
                             else:
@@ -120,6 +116,10 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
+                                x=data[0]*math.cos((math.pi/180)*data[1])
+                                y=data[0]*math.sin((math.pi/180)*data[1])
+                                cartxlist.append((x))
+                                cartylist.append((y))
                                 end.append(data)
                             gprev='01'
                             
@@ -137,7 +137,7 @@ if __name__ == "__main__":
                             yt=y-(yprev+j)
                             xt=(xprev+i)-x
                             rt=math.sqrt((xt*xt)+(yt*yt))
-                            div = 100
+                            div = 10
                             xdif = x - xprev
                             ydif = y - yprev
                             n=0
@@ -164,6 +164,10 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
+                                x=data[0]*math.cos((math.pi/180)*data[1])
+                                y=data[0]*math.sin((math.pi/180)*data[1])
+                                cartxlist.append((x))
+                                cartylist.append((y))
                                 end.append(data)
                             gprev='02'
                             
@@ -180,7 +184,7 @@ if __name__ == "__main__":
                             yt=y-(yprev+j)
                             xt=(xprev+i)-x
                             rt=math.sqrt((xt*xt)+(yt*yt))
-                            div = 100
+                            div = 10
                             xdif = x - xprev
                             ydif = y - yprev
                             n=0
@@ -205,17 +209,28 @@ if __name__ == "__main__":
                                 n+=1
                             xprev = x
                             yprev = y
+                            cartlist=[]
                             for data in setpts:
+                                x=data[0]*math.cos((math.pi/180)*data[1])
+                                y=data[0]*math.sin((math.pi/180)*data[1])
+                                cartxlist.append((x))
+                                cartylist.append((y))
                                 end.append(data)
                             gprev='03'
         f = open('setpoints.txt','w')
         kprev=0
+        plot.plot(cartxlist, cartylist, 'r')                #plots x and y values in red
+        plot.xlabel('x')              #labels x axis
+        plot.ylabel('y')   #labels y axis 
+        plot.title('line')                  #sets plot title
+        plot.show()                         #display plot
         for k in end:
             if(k!=kprev):
                 f.write(str(k))
                 f.write('\n')
             kprev=k
         f.close()
+        
                             
                 
                         
