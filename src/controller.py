@@ -1,6 +1,6 @@
 class Controller:
     
-    def __init__ (self, motor_theta, encoder_theta, motor_r, encoder_r, done_flag):
+    def __init__ (self, motor_theta, encoder_theta, motor_r, encoder_r, pen, done_flag):
         
         self.motor_theta = motor_theta
         self.encoder_theta = encoder_theta
@@ -10,7 +10,9 @@ class Controller:
         
         self.done_flag = done_flag
         
-    def moveto (self, target_theta, speed_theta, target_r, speed_r, theta_threshold = 350, r_threshold = 500):
+        self.pen = pen
+        
+    def moveto (self, target_theta, speed_theta, target_r, speed_r, target_pen, theta_threshold = 350, r_threshold = 500):
         
         # thresholds in ticks
         # 4.3125 inches = 112000 ticks
@@ -42,6 +44,13 @@ class Controller:
             
         elif (self.encoder_r.get() < target_r):
             self.motor_r.set_duty_cycle(-speed_r)
+            
+        if target_pen == 1:
+            self.pen.down()
+            
+        elif target_pen == 0:
+            self.pen.up()
+            
 
         
 if __name__ == "__main__":
