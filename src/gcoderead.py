@@ -45,20 +45,23 @@ if __name__ == "__main__":
                                     elif(y=='J'):
                                         gcomm[5]=list[temp].strip('GXYZFIJ')
                                 temp+=1
-                        #print('GXYZFIJ:',prev)
+                        #print('GXYZFIJ:',gcomm)
                         if(gcomm[0]=='21'):
                             gprev='21'
                         elif(gcomm[0]=='00'):
                             x = float(gcomm[1])
                             y = float(gcomm[2])
-                            xout = x - xprev
-                            yout = y - yprev
-                            if(xout==0.0):
-                                r=math.sqrt((xout*xout)+(yout*yout))
-                                theta=0
+                            xdif=x-xprev
+                            ydif=y-yprev
+                            if(xdif<=0.0):
+                                r=math.sqrt((x*x)+(y*y))
+                                if(x==0.0):
+                                    theta=0
+                                else:
+                                    theta=math.atan(y/x)*(180/math.pi)
                             else:
-                                r=math.sqrt((xout*xout)+(yout*yout))
-                                theta=math.atan(yout/xout)*(180/math.pi)
+                                r=math.sqrt((xdif*xdif)+(ydif*ydif))
+                                theta=math.atan(ydif/xdif)*(180/math.pi)
                             setpts=[(r,theta,0)]
                             xprev = x
                             yprev = y
@@ -96,6 +99,12 @@ if __name__ == "__main__":
                                 else:
                                     setpts.append((r,theta,1))
                                 i+=1
+                            r=math.sqrt((x*x)+(y*y))
+                            theta=math.atan(y/x)*(180/math.pi)
+                            if(z > 0):
+                                setpts.append((r,theta,0))
+                            else:
+                                setpts.append((r,theta,1))
                             xprev = x
                             yprev = y
                             #print(setpts)
