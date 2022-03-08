@@ -1,6 +1,6 @@
 class Controller:
     
-    def __init__ (self, motor_theta, encoder_theta, motor_r, encoder_r):
+    def __init__ (self, motor_theta, encoder_theta, motor_r, encoder_r, done_flag):
         
         self.motor_theta = motor_theta
         self.encoder_theta = encoder_theta
@@ -8,11 +8,20 @@ class Controller:
         self.motor_r = motor_r
         self.encoder_r = encoder_r
         
-    def moveto (self, target_theta, speed_theta, target_r, speed_r, theta_threshold = 350, r_threshold = 350):
+        self.done_flag = done_flag
         
+    def moveto (self, target_theta, speed_theta, target_r, speed_r, theta_threshold = 350, r_threshold = 500):
+        
+        # thresholds in ticks
+        # 4.3125 inches = 112000 ticks
+        # 180 degrees = 44000 ticks
+        
+        target_theta = target_theta * 44000 / 180
+        target_r = target_r * 112000 / 4.3125
         
         if (abs(target_theta - self.encoder_theta.get()) < theta_threshold):
             self.motor_theta.set_duty_cycle(0)
+            self.done_flag.put(1)
             #print("WITHIN THRESHOLD")
             
         elif (self.encoder_theta.get() > target_theta):
@@ -24,6 +33,7 @@ class Controller:
     
         if (abs(target_r - self.encoder_r.get()) < r_threshold):
             self.motor_r.set_duty_cycle(0)
+            self.done_flag.put(1)
             #print("WITHIN THRESHOLD")
             
         elif (self.encoder_r.get() > target_r):
