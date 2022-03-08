@@ -46,8 +46,10 @@ if __name__ == "__main__":
                                     elif(y=='J'):
                                         gcomm[5]=list[temp].strip('GXYZFIJ')
                                 temp+=1
+                                
                         if(gcomm[0]=='21'):
                             gprev='21'
+                            
                         elif(gcomm[0]=='00'):
                             x = float(gcomm[1])
                             y = float(gcomm[2])
@@ -195,9 +197,12 @@ if __name__ == "__main__":
                                 end.append(data)
                             gprev='03'
         f = open('setpoints.txt','w')
+        kprev=0
         for k in end:
-            f.write(str(k))
-            f.write('\n')
+            if(k!=kprev):
+                f.write(str(k))
+                f.write('\n')
+            kprev=k
         f.close()
                             
                 
