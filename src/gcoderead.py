@@ -45,7 +45,6 @@ if __name__ == "__main__":
                                     elif(y=='J'):
                                         gcomm[5]=list[temp].strip('GXYZFIJ')
                                 temp+=1
-                        #print('GXYZFIJ:',gcomm)
                         if(gcomm[0]=='21'):
                             gprev='21'
                         elif(gcomm[0]=='00'):
@@ -67,7 +66,6 @@ if __name__ == "__main__":
                             yprev = y
                             for data in setpts:
                                 print(data)
-                            #print(setpts)
                             gprev='00'
                             
                         elif(gcomm[0]=='01'):
@@ -94,7 +92,6 @@ if __name__ == "__main__":
                                     r=math.sqrt((xout*xout)+(yout*yout))
                                     theta=math.atan(yout/xout)*(180/math.pi)
                                 if(z > 0):
-                                    print('yout')
                                     setpts.append((r,theta,0))
                                 else:
                                     setpts.append((r,theta,1))
@@ -107,27 +104,34 @@ if __name__ == "__main__":
                                 setpts.append((r,theta,1))
                             xprev = x
                             yprev = y
-                            #print(setpts)
                             for data in setpts:
                                 print(data)
                             gprev='01'
                             
                             
                         elif(gcomm[0]=='02'):
-                            x = gcomm[1]
-                            y = gcomm[2]
-                            z = gcomm[3]
-                            i = gcomm[4]
-                            j = gcomm[5]
+                            x = float(gcomm[1])
+                            y = float(gcomm[2])
+                            z = float(gcomm[3])
+                            i = float(gcomm[4])
+                            j = float(gcomm[5])
+                            if(i!=0.0 or j!=0.0):
+                                phi=math.atan(j/i)
+                            else:
+                                phi=0
+                            yt=y-(yprev+j)
+                            xt=(xprev+i)-x
+                            rt=math.sqrt((xt*xt)+(yt*yt))
                             div = 10
-                            xdif = (x-xprev)
-                            ydif = (y-yprev)
-                            i=0
-                            xinc = xdif/div
-                            yinc = ydif/div
-                            while(i < div):
-                                xout = xinc + (xinc * i)
-                                yout = yinc + (yinc * i)
+                            xdif = x - xprev
+                            ydif = y - yprev
+                            n=0
+                            phiinc = phi/div
+                            while(n < div):
+                                phidiv = phiinc + (phiinc * n)
+                                xout = rt*math.cos(phidiv)
+                                yout = rt*math.sin(phidiv)
+                        
                                 if(gprev=='00'):
                                     r=math.sqrt((x*x)+(y*y))
                                     theta=math.atan(y/x)*(180/math.pi)
@@ -141,21 +145,53 @@ if __name__ == "__main__":
                                     setpts.append((r,theta,0))
                                 else:
                                     setpts.append((r,theta,1))
-                                i+=1
+                                n+=1
                             xprev = x
                             yprev = y
-                            #print(setpts)
                             for data in setpts:
                                 print(data)
-                            gprev='01'
                             gprev='02'
                             
                         elif(gcomm[0]=='03'):
-                            x = gcomm[1]
-                            y = gcomm[2]
-                            z = gcomm[3]
-                            i = gcomm[4]
-                            j = gcomm[5]
+                            x = float(gcomm[1])
+                            y = float(gcomm[2])
+                            z = float(gcomm[3])
+                            i = float(gcomm[4])
+                            j = float(gcomm[5])
+                            if(i!=0.0 or j!=0.0):
+                                phi=math.atan(j/i)
+                            else:
+                                phi=0
+                            yt=y-(yprev+j)
+                            xt=(xprev+i)-x
+                            rt=math.sqrt((xt*xt)+(yt*yt))
+                            div = 10
+                            xdif = x - xprev
+                            ydif = y - yprev
+                            n=0
+                            phiinc = phi/div
+                            while(n < div):
+                                phidiv = phiinc + (phiinc * n)
+                                xout = rt*math.cos(phidiv)
+                                yout = rt*math.sin(phidiv)
+                                if(gprev=='00'):
+                                    r=math.sqrt((x*x)+(y*y))
+                                    theta=math.atan(y/x)*(180/math.pi)
+                                elif(xout==0.0):
+                                    r=math.sqrt((xout*xout)+(yout*yout))
+                                    theta=math.atan(yout/xprev)*(180/math.pi)
+                                else:
+                                    r=math.sqrt((xout*xout)+(yout*yout))
+                                    theta=math.atan(yout/xout)*(180/math.pi)
+                                if(z > 0):
+                                    setpts.append((r,theta,0))
+                                else:
+                                    setpts.append((r,theta,1))
+                                n+=1
+                            xprev = x
+                            yprev = y
+                            for data in setpts:
+                                print(data)
                             gprev='03'
                             
                 

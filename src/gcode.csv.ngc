@@ -6,17 +6,18 @@ M3
 (Header end.)
 G20 (All units in inches)
 
-(Start cutting path id: path2335)
+(Start cutting path id: path3260)
 (Change tool to Default tool)
 
 G00 Z5.000000
-G00 X0.992187 Y0.369010
+G00 X1.852083 Y3.080990
 
 G01 Z-0.125000 F100.0(Penetrate)
-G01 X0.992187 Y5.396100 Z-0.125000 F400.000000
+G02 X2.211146 Y2.004140 Z-0.125000 I-0.897567 J-0.897571 F400.000000
+G02 X1.852083 Y1.460420 Z-0.125000 I-0.754119 J0.107588
 G00 Z5.000000
 
-(End cutting path id: path2335)
+(End cutting path id: path3260)
 
 
 (Footer)
