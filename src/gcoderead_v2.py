@@ -7,7 +7,7 @@ def conv_r(x,y):
 
 def conv_theta(x,y):
     
-    theta = math.atan2(y,x)*180/math.pi
+    theta = math.atan2(x,y)*180/math.pi
     return theta
 
 if __name__ == "__main__":
