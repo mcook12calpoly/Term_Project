@@ -3,9 +3,6 @@ import math
 if __name__ == "__main__":
         with open('gcode.csv.ngc') as gcode:
             gcomm=[0,0,0,0,0,0]
-            xprev=0
-            yprev=0
-            gprev='0'
             for line in gcode:
                 line = line.strip()
                 for x in line:
@@ -45,30 +42,18 @@ if __name__ == "__main__":
                                     elif(y=='J'):
                                         gcomm[5]=list[temp].strip('GXYZFIJ')
                                 temp+=1
-                        #print('GXYZFIJ:',gcomm)
+                        #print('GXYZFIJ:',prev)
+                        xprev=0
+                        yprev=0
                         if(gcomm[0]=='21'):
-                            gprev='21'
+                            print('units=mm')
                         elif(gcomm[0]=='00'):
                             x = float(gcomm[1])
                             y = float(gcomm[2])
-                            xdif=x-xprev
-                            ydif=y-yprev
-                            if(xdif<=0.0):
-                                r=math.sqrt((x*x)+(y*y))
-                                if(x==0.0):
-                                    theta=0
-                                else:
-                                    theta=math.atan(y/x)*(180/math.pi)
-                            else:
-                                r=math.sqrt((xdif*xdif)+(ydif*ydif))
-                                theta=math.atan(ydif/xdif)*(180/math.pi)
-                            setpts=[(r,theta,0)]
+                            setpts=[(x,y,0)]
                             xprev = x
                             yprev = y
-                            for data in setpts:
-                                print(data)
-                            #print(setpts)
-                            gprev='00'
+                            print('move',setpts)
                             
                         elif(gcomm[0]=='01'):
                             setpts=[]
@@ -84,79 +69,33 @@ if __name__ == "__main__":
                             while(i < div):
                                 xout = xinc + (xinc * i)
                                 yout = yinc + (yinc * i)
-                                if(gprev=='00'):
-                                    r=math.sqrt((x*x)+(y*y))
-                                    theta=math.atan(y/x)*(180/math.pi)
-                                elif(xout==0.0):
-                                    r=math.sqrt((xout*xout)+(yout*yout))
-                                    theta=math.atan(yout/xprev)*(180/math.pi)
-                                else:
-                                    r=math.sqrt((xout*xout)+(yout*yout))
-                                    theta=math.atan(yout/xout)*(180/math.pi)
+                                r=math.sqrt((xout*xout)+(yout*yout))
+                                theta=math.atan(yout/xout)*(180/math.pi)
                                 if(z > 0):
-                                    print('yout')
-                                    setpts.append((r,theta,0))
+                                    setpts.append((xout,yout,0))
                                 else:
-                                    setpts.append((r,theta,1))
+                                    setpts.append((xout,yout,1))
                                 i+=1
-                            r=math.sqrt((x*x)+(y*y))
-                            theta=math.atan(y/x)*(180/math.pi)
-                            if(z > 0):
-                                setpts.append((r,theta,0))
-                            else:
-                                setpts.append((r,theta,1))
                             xprev = x
                             yprev = y
-                            #print(setpts)
-                            for data in setpts:
-                                print(data)
-                            gprev='01'
+                            print('linear',setpts)
                             
                             
                         elif(gcomm[0]=='02'):
+                            print('circular cw')
                             x = gcomm[1]
                             y = gcomm[2]
                             z = gcomm[3]
                             i = gcomm[4]
                             j = gcomm[5]
-                            div = 10
-                            xdif = (x-xprev)
-                            ydif = (y-yprev)
-                            i=0
-                            xinc = xdif/div
-                            yinc = ydif/div
-                            while(i < div):
-                                xout = xinc + (xinc * i)
-                                yout = yinc + (yinc * i)
-                                if(gprev=='00'):
-                                    r=math.sqrt((x*x)+(y*y))
-                                    theta=math.atan(y/x)*(180/math.pi)
-                                elif(xout==0.0):
-                                    r=math.sqrt((xout*xout)+(yout*yout))
-                                    theta=math.atan(yout/xprev)*(180/math.pi)
-                                else:
-                                    r=math.sqrt((xout*xout)+(yout*yout))
-                                    theta=math.atan(yout/xout)*(180/math.pi)
-                                if(z > 0):
-                                    setpts.append((r,theta,0))
-                                else:
-                                    setpts.append((r,theta,1))
-                                i+=1
-                            xprev = x
-                            yprev = y
-                            #print(setpts)
-                            for data in setpts:
-                                print(data)
-                            gprev='01'
-                            gprev='02'
                             
                         elif(gcomm[0]=='03'):
+                            print('circular ccw')
                             x = gcomm[1]
                             y = gcomm[2]
                             z = gcomm[3]
                             i = gcomm[4]
                             j = gcomm[5]
-                            gprev='03'
                             
                 
                         
