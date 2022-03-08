@@ -51,13 +51,17 @@ def task_move():
         yield(0)
         
 def task_serial_read():
+    
     while True:
+        
         if not q_setpoints_theta.full():
-            values = nb_in.get()
-            q_setpoints_theta.put(values[1])
-            q_setpoints_r.put(values[2])
-            q_setpoints_pen.put(values[3])
-            print("serial:",values)
+            if nb_in.any():
+                values = nb_in.get()
+                q_setpoints_theta.put(values[2])
+                q_setpoints_r.put(values[1])
+                q_setpoints_pen.put(values[3])
+                #print("serial:",values)
+            
         yield(0)
         
 if __name__ == "__main__":
@@ -74,6 +78,11 @@ if __name__ == "__main__":
     q_setpoints_r = task_share.Queue ('f', 100, thread_protect = False, overwrite = False, name = "r setpoints")
     
     q_setpoints_pen = task_share.Queue ('i', 100, thread_protect = False, overwrite = False, name = "pen setpoints")
+    
+    # initial points in case queue empty
+    q_setpoints_theta.put(0)
+    q_setpoints_r.put(0)
+    q_setpoints_pen.put(0)
     
 #     q_setpoints_theta.put(140)
 #     q_setpoints_theta.put(90)
@@ -105,6 +114,7 @@ if __name__ == "__main__":
     # creating pen object
     pen = Pen()
     
+    # move pen up at start
     pen.up()
     
     # creating controller object
