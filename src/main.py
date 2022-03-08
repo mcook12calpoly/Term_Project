@@ -9,7 +9,6 @@ from motordriver import MotorDriver
 from home import Home
 from controller import Controller
 from pen import Pen
-from nb_input import NB_Input
 
 def task_encoder_update():
     while True:
@@ -52,11 +51,11 @@ def task_move():
 def task_read():
     
     values_split = []
-    file = open('test.txt', 'r')
+    file = open('setpoints.txt', 'r')
     values = file.read()
     file.close()
-    values = values.replace('(','')
-    values = values.replace(')','')
+    values = values.replace('[','')
+    values = values.replace(']','')
     values = values.replace(' ','')
     
     values = values.splitlines()
@@ -64,10 +63,10 @@ def task_read():
     for i in values:
         values_split.append(i.rsplit(','))
     
-    print(values_split)
+    #print(values_split)
     
     while True:
-        
+        #gc.collect()
         if not q_setpoints_theta.full():
             
             if values_split:
@@ -88,31 +87,16 @@ if __name__ == "__main__":
     
     s_done = task_share.Share ('i', thread_protect = False, name = "done flag")
     
-    q_setpoints_theta = task_share.Queue ('f', 100, thread_protect = False, overwrite = False, name = "theta setpoints")
+    q_setpoints_theta = task_share.Queue ('f', 50, thread_protect = False, overwrite = False, name = "theta setpoints")
     
-    q_setpoints_r = task_share.Queue ('f', 100, thread_protect = False, overwrite = False, name = "r setpoints")
+    q_setpoints_r = task_share.Queue ('f', 50, thread_protect = False, overwrite = False, name = "r setpoints")
     
-    q_setpoints_pen = task_share.Queue ('i', 100, thread_protect = False, overwrite = False, name = "pen setpoints")
+    q_setpoints_pen = task_share.Queue ('i', 50, thread_protect = False, overwrite = False, name = "pen setpoints")
     
     # initial points in case queue empty
     q_setpoints_theta.put(0)
     q_setpoints_r.put(0)
     q_setpoints_pen.put(0)
-    
-#     q_setpoints_theta.put(140)
-#     q_setpoints_theta.put(90)
-#     q_setpoints_theta.put(140)
-#     q_setpoints_theta.put(90)
-#     
-#     q_setpoints_r.put(2)
-#     q_setpoints_r.put(1)
-#     q_setpoints_r.put(2)
-#     q_setpoints_r.put(1)
-#     
-#     q_setpoints_pen.put(0)
-#     q_setpoints_pen.put(1)
-#     q_setpoints_pen.put(0)
-#     q_setpoints_pen.put(1)
     
     # creating encoder objects
     enc_wheel = Encoder(pyb.Pin.board.PB6, pyb.Pin.board.PB7, 4)
@@ -135,8 +119,6 @@ if __name__ == "__main__":
     # creating controller object
     controller = Controller(motor_wheel, s_enc_wheel, motor_screw, s_enc_screw, pen, s_done)
     
-    # creating nb input object
-    nb_in = NB_Input (pyb.USB_VCP (), echo=True)
     
     home = Home()
     home.goHome(motor_screw, enc_screw, switch_screw, 0, 75)
@@ -158,10 +140,10 @@ if __name__ == "__main__":
                          period = 50, profile = True, trace = False)
 
     task2 = cotask.Task (task_move, name = 'move', priority = 2, 
-                         period = 50, profile = True, trace = False)
+                         period = 10, profile = True, trace = False)
     
     task3 = cotask.Task (task_read, name = 'serial read', priority = 3, 
-                         period = 40, profile = True, trace = False)
+                         period = 20, profile = True, trace = False)
     
     cotask.task_list.append (task1)
     cotask.task_list.append (task2)
