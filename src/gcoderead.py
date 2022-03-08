@@ -3,6 +3,7 @@ import math
 if __name__ == "__main__":
         with open('gcode.csv.ngc') as gcode:
             gcomm=[0,0,0,0,0,0]
+            end=[]
             xprev=0
             yprev=0
             gprev='0'
@@ -65,7 +66,7 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
-                                print(data)
+                                end.append(data)
                             gprev='00'
                             
                         elif(gcomm[0]=='01'):
@@ -105,7 +106,7 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
-                                print(data)
+                                end.append(data)
                             gprev='01'
                             
                             
@@ -149,7 +150,7 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
-                                print(data)
+                                end.append(data)
                             gprev='02'
                             
                         elif(gcomm[0]=='03'):
@@ -191,8 +192,13 @@ if __name__ == "__main__":
                             xprev = x
                             yprev = y
                             for data in setpts:
-                                print(data)
+                                end.append(data)
                             gprev='03'
+        f = open('setpoints.txt','w')
+        for k in end:
+            f.write(str(k))
+            f.write('\n')
+        f.close()
                             
                 
                         
