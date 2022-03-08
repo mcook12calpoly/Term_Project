@@ -42,61 +42,61 @@ if __name__ == "__main__":
                                     elif(y=='J'):
                                         gcomm[5]=list[temp].strip('GXYZFIJ')
                                 temp+=1
-                        #print('GXYZFIJ:',prev)
-                        xprev=0
-                        yprev=0
-                        if(gcomm[0]=='21'):
-                            print('units=mm')
-                        elif(gcomm[0]=='00'):
-                            x = float(gcomm[1])
-                            y = float(gcomm[2])
-                            setpts=[(x,y,0)]
-                            xprev = x
-                            yprev = y
-                            print('move',setpts)
-                            
-                        elif(gcomm[0]=='01'):
-                            setpts=[]
-                            x = float(gcomm[1])
-                            y = float(gcomm[2])
-                            z = float(gcomm[3])
-                            div = 10
-                            xdif = (x-xprev)
-                            ydif = (y-yprev)
-                            i=0
-                            xinc = xdif/div
-                            yinc = ydif/div
-                            while(i < div):
-                                xout = xinc + (xinc * i)
-                                yout = yinc + (yinc * i)
-                                r=math.sqrt((xout*xout)+(yout*yout))
-                                theta=math.atan(yout/xout)*(180/math.pi)
-                                if(z > 0):
-                                    setpts.append((xout,yout,0))
-                                else:
-                                    setpts.append((xout,yout,1))
-                                i+=1
-                            xprev = x
-                            yprev = y
-                            print('linear',setpts)
-                            
-                            
-                        elif(gcomm[0]=='02'):
-                            print('circular cw')
-                            x = gcomm[1]
-                            y = gcomm[2]
-                            z = gcomm[3]
-                            i = gcomm[4]
-                            j = gcomm[5]
-                            
-                        elif(gcomm[0]=='03'):
-                            print('circular ccw')
-                            x = gcomm[1]
-                            y = gcomm[2]
-                            z = gcomm[3]
-                            i = gcomm[4]
-                            j = gcomm[5]
-                            
-                
-                        
-            
+                        print(gcomm)
+#                         xprev=0
+#                         yprev=0
+#                         if(gcomm[0]=='21'):
+#                             print('units=mm')
+#                         elif(gcomm[0]=='00'):
+#                             x = float(gcomm[1])
+#                             y = float(gcomm[2])
+#                             setpts=[(x,y,0)]
+#                             xprev = x
+#                             yprev = y
+#                             print('move',setpts)
+#                             
+#                         elif(gcomm[0]=='01'):
+#                             setpts=[]
+#                             x = float(gcomm[1])
+#                             y = float(gcomm[2])
+#                             z = float(gcomm[3])
+#                             div = 10
+#                             xdif = (x-xprev)
+#                             ydif = (y-yprev)
+#                             i=0
+#                             xinc = xdif/div
+#                             yinc = ydif/div
+#                             while(i < div):
+#                                 xout = xinc + (xinc * i)
+#                                 yout = yinc + (yinc * i)
+#                                 r=math.sqrt((xout*xout)+(yout*yout))
+#                                 theta=math.atan(yout/xout)*(180/math.pi)
+#                                 if(z > 0):
+#                                     setpts.append((xout,yout,0))
+#                                 else:
+#                                     setpts.append((xout,yout,1))
+#                                 i+=1
+#                             xprev = x
+#                             yprev = y
+#                             print('linear',setpts)
+#                             
+#                             
+#                         elif(gcomm[0]=='02'):
+#                             print('circular cw')
+#                             x = gcomm[1]
+#                             y = gcomm[2]
+#                             z = gcomm[3]
+#                             i = gcomm[4]
+#                             j = gcomm[5]
+#                             
+#                         elif(gcomm[0]=='03'):
+#                             print('circular ccw')
+#                             x = gcomm[1]
+#                             y = gcomm[2]
+#                             z = gcomm[3]
+#                             i = gcomm[4]
+#                             j = gcomm[5]
+#                             
+#                 
+#                         
+#             

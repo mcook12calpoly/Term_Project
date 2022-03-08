@@ -72,24 +72,35 @@ if __name__ == "__main__":
                             gprev='00'
                             
                         elif(gcomm[0]=='01'):
+                            print('next line')
                             setpts=[]
                             x = float(gcomm[1])
                             y = float(gcomm[2])
                             z = float(gcomm[3])
+                            print(x)
+                            print(y)
+                            print(z)
                             div = 100
+                            print('xprev',xprev)
                             xdif = (x-xprev)
                             ydif = (y-yprev)
+                            print('xdif',xdif)
+                            print('ydif',ydif)
                             i=0
                             xinc = xdif/div
                             yinc = ydif/div
+                            print('xinc',xinc)
+                            print('yinc',yinc)
                             while(i < div):
                                 xout = xinc + (xinc * i)
                                 yout = yinc + (yinc * i)
                                 if(gprev=='00'):
                                     r=math.sqrt((x*x)+(y*y))
                                     theta=math.atan(y/x)*(180/math.pi)
+                                    gprev='01'
+                                    break
                                 elif(xout==0.0):
-                                    r=math.sqrt((xout*xout)+(yout*yout))
+                                    r=math.sqrt((xprev*xprev)+(yout*yout))
                                     theta=math.atan(yout/xprev)*(180/math.pi)
                                 else:
                                     r=math.sqrt((xout*xout)+(yout*yout))
@@ -101,6 +112,7 @@ if __name__ == "__main__":
                                 i+=1
                             r=math.sqrt((x*x)+(y*y))
                             theta=math.atan(y/x)*(180/math.pi)
+                            print('theta',theta)
                             if(z > 0):
                                 setpts.append((r,theta,0))
                             else:
