@@ -73,7 +73,7 @@ if __name__ == "__main__":
                             x = float(gcomm[1])
                             y = float(gcomm[2])
                             z = float(gcomm[3])
-                            div = 10
+                            div = 100
                             xdif = (x-xprev)
                             ydif = (y-yprev)
                             i=0
@@ -122,7 +122,7 @@ if __name__ == "__main__":
                             yt=y-(yprev+j)
                             xt=(xprev+i)-x
                             rt=math.sqrt((xt*xt)+(yt*yt))
-                            div = 10
+                            div = 100
                             xdif = x - xprev
                             ydif = y - yprev
                             n=0
@@ -165,7 +165,7 @@ if __name__ == "__main__":
                             yt=y-(yprev+j)
                             xt=(xprev+i)-x
                             rt=math.sqrt((xt*xt)+(yt*yt))
-                            div = 10
+                            div = 100
                             xdif = x - xprev
                             ydif = y - yprev
                             n=0
