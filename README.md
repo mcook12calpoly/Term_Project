@@ -32,7 +32,8 @@ The frame for our machine was constructed of aluminum tubing and 3d printed conn
 ---
 ### Software Design
 The software begins with a custom GCode file that is processed through a script that goes line by line and convcerts each command into polar setpoints of r and theta and a pen state(up or down). This processed list of setpoints is then loaded on the board where it can be read by the main file, with each line placed in a queue. After initially sending both motors (screw and wheel) back to their home positions near the origin, three tasks are created and added to the task list: update encoder, move and read. The update encoder task updates the encoder drivers to get the current position values for both motors, the move task moves the motors (and pen servo if applicable) until their corresponding enocders reach the current setpoint on the top of the queue. The read task adds each line of setpoints to the queue one at a time.
-Link to Doxygen:
+
+Link to Doxygen: https://mcook12calpoly.github.io/Term_Project/
 
 ---
 ### Results
