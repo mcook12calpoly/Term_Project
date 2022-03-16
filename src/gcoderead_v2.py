@@ -1,3 +1,13 @@
+'''! @file      gcoderead_v2.py
+                This program opens a stated gcode script, obtains the command and coordiante values from each line and creates a list of setpoints for each motor to move to.
+                This program was to work for linear movement gcode commands by finding the r and theta setpoints using the appropriate curvilinear equations.
+                The curvilinear setpoints are then exported to a file which is read by the main program.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 7, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 import math
 
 def conv_r(x,y):

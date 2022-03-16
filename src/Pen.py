@@ -1,3 +1,11 @@
+'''! @file      Pen.py
+                This program includes functions for initializing a Pen state controller, and setting a servo driver to one of two positions.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 1, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 import pyb
 import time
 from servodriver import ServoDriver
@@ -14,10 +22,8 @@ class Pen:
 
     def down (self):
         '''!
-        This method sets the position of the pen to up
-        by sending corresponding PWM signal to the servo.
-        @param level A signed integer holding the duty
-               cycle of the voltage sent to the motor 
+        This method sets the position of the pen to down
+        by sending corresponding PWM signal to the servo. 
         '''
         
         ##Create a servo driver
@@ -28,10 +34,8 @@ class Pen:
             
     def up (self):
         '''!
-        This method sets the position of the pen to down
+        This method sets the position of the pen to up
         by sending corresponding PWM signal to the servo.
-        @param level A signed integer holding the duty
-               cycle of the voltage sent to the motor 
         '''
         
         ##Create a servo driver

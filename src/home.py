@@ -1,3 +1,11 @@
+'''! @file      home.py
+                This program includes functions for initializing a home class, and sending the motors to their home positions.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 1, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 import pyb
 import time
 from encoder import Encoder
@@ -5,10 +13,17 @@ from motordriver import MotorDriver
 from switch import Switch
 
 class Home:
+    '''! 
+    This class implements a Home object to interface with the motors. 
+    '''
     def __init__ (self):
         pass
     
     def goHome (self, motor, encoder, switch, state, speed):
+        '''!
+        This method drives the motors until their corresponding limit switch is pressed,
+        indicating that the home position is reached, then stopping the motors. 
+        '''
         while (switch.state() == state):
             motor.set_duty_cycle(speed)
             time.sleep_ms(10)
