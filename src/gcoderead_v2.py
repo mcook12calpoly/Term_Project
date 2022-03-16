@@ -11,12 +11,16 @@
 import math
 
 def conv_r(x,y):
-    
+    '''!
+    This method obtains the polar r value from given x,y coordinates 
+    '''
     r = math.sqrt(x**2 + y**2)    
     return r
 
 def conv_theta(x,y):
-    
+    '''!
+    This method obtains the polar theta value from given x,y coordinates 
+    '''
     theta = math.atan2(x,y)*180/math.pi
     return theta
 
@@ -30,6 +34,7 @@ if __name__ == "__main__":
         with open('gcode.csv.ngc') as gcode:
             gcomm=[0,0,0,0,0,0]
             for line in gcode:
+                #read each line of gcode and strip unnecessary values
                 line = line.strip()
                 for x in line:
                     if(x != 'G'):
@@ -42,6 +47,7 @@ if __name__ == "__main__":
                             if(len(my_list)>1):
                                 for y in my_list[1]:
                                     for x in y:
+                                        #obtain any X,Y,Z,I,J values from line of Gcode
                                         if(x=='Y'):
                                             gcomm[2]=my_list[1].strip('GXYZIJ')
                                         elif(x=='X'):
@@ -50,13 +56,14 @@ if __name__ == "__main__":
                                             gcomm[3]=my_list[1].strip('GXYZIJ')
                                         elif(x=='I'):
                                             gcomm[4]=my_list[1].strip('GXYZIJ')
-                                        elif(x=='I'):
+                                        elif(x=='J'):
                                             gcomm[5]=my_list[1].strip('GXYZIJ')
                         elif(len(my_list)>=3):
                             temp=0
                             gcomm[0]=my_list[0].strip('GXYZF')
                             for x in my_list:
                                 for y in x:
+                                    #obtain any X,Y,Z,I,J values from line of Gcode
                                     if(y=='X'):
                                         gcomm[1]=my_list[temp].strip('GXYZFIJ')
                                     elif(y=='Y'):
@@ -71,6 +78,7 @@ if __name__ == "__main__":
                         print(gcomm)
                         
                         if (gcomm[0] == '00'):
+                            #for move to point commands
                             x = float(gcomm[1])
                             y = float(gcomm[2])
                             z = float(gcomm[3])
@@ -86,11 +94,12 @@ if __name__ == "__main__":
                             #print('x_prev:', x_prev,'y_prev:',y_prev)
                         
                         if (gcomm[0] == '01'):
+                            #for linear movement commands
                             print("back to start")
                             x = float(gcomm[1])
                             y = float(gcomm[2])
                             z = float(gcomm[3])
-                            
+                            #divide line into segments for given resolution
                             distance = math.sqrt((x_prev-x)**2 + (y_prev-y)**2)
                             num_segs = distance/res
                             
@@ -101,7 +110,7 @@ if __name__ == "__main__":
                             i=0
                             while i < num_segs:
                                 if round(dx,10) == 0:
-                                    # vertical line
+                                    #Find next XY setpoints for vertical line
                                     print('in vertical')
                                     x_seg = x
                                     if (y_prev < y):
@@ -122,7 +131,7 @@ if __name__ == "__main__":
                                     print("y:", y, 'y_prev:', y_prev)
                                     
                                 elif round(dy, 10) == 0 :
-                                    # horizontal line
+                                    #Find next XY setpoints for horizontal line
                                     print('in horizontal line')
                                     y_seg = y
                                     if (x_prev < x):
@@ -130,8 +139,10 @@ if __name__ == "__main__":
                                     elif (x_prev > x):
                                         x_seg = x_prev - res
                                         
+                                    #convert XY setpoints to polar setpoints    
                                     r_seg = conv_r(x_seg, y_seg)
                                     theta_seg = conv_theta(x_seg, y_seg)
+                                    
                                     
                                     #r_seg = x_seg
                                     #theta_seg = y_seg
@@ -149,6 +160,7 @@ if __name__ == "__main__":
                         
                         f = open('setpoints.txt','w')
                         for k in end:
+                            #write all setpoints to text file
                             f.write(str(k))
                             f.write('\n')
                         f.close()

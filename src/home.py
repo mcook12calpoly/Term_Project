@@ -25,10 +25,12 @@ class Home:
         indicating that the home position is reached, then stopping the motors. 
         '''
         while (switch.state() == state):
+            #move the motor at the specified speed
             motor.set_duty_cycle(speed)
             time.sleep_ms(10)
+        #stop the motor once the switch is pressed
         motor.set_duty_cycle(0)
-        #print("duty set to 0")
+        #set the encoder's position to 0
         encoder.zero()
         
 if __name__ == "__main__":

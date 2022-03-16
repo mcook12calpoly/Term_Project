@@ -26,10 +26,10 @@ class Pen:
         by sending corresponding PWM signal to the servo. 
         '''
         
-        ##Create a servo driver
+        #Create a servo driver
         s1 = ServoDriver(pyb.Pin.board.PB3, 2)
         
-        #
+        #Set the servo to its end position
         s1.set_duty_cycle(0)
             
     def up (self):
@@ -41,7 +41,7 @@ class Pen:
         ##Create a servo driver
         s1 = ServoDriver(pyb.Pin.board.PB3, 2)
         
-        #
+        #Set the servo to its middle position
         s1.set_duty_cycle(70)
     
 
