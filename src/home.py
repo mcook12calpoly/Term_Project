@@ -22,7 +22,12 @@ class Home:
     def goHome (self, motor, encoder, switch, state, speed):
         '''!
         This method drives the motors until their corresponding limit switch is pressed,
-        indicating that the home position is reached, then stopping the motors. 
+        indicating that the home position is reached, then stopping the motors.
+        @param motor Motor to home
+        @param encoder Encoder associated with motor
+        @param switch Switch associated with motor
+        @param state Switch state
+        @param speed Speed to home at
         '''
         while (switch.state() == state):
             #move the motor at the specified speed

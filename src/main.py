@@ -1,3 +1,12 @@
+'''! @file      main.py
+                This program is the main program for controlling our 2.5 axis pen plotter.
+                It utilizes cooperative multi tasking, with 3 main tasks- updating the encoder, moving the motors, and parsing/storing setpoint values.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 14, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 import gc
 import pyb
 import cotask
@@ -11,6 +20,9 @@ from controller import Controller
 from pen import Pen
 
 def task_encoder_update():
+    """!
+    Task which reads and stores encoder values into shared variables
+    """
     while True:
         enc_wheel.update()
         enc_screw.update()
@@ -22,7 +34,9 @@ def task_encoder_update():
         yield(0)
         
 def task_move():
-    
+    """!
+    Task which moves the motors using the functions in controller.py
+    """
     setpoint_theta = 0
     setpoint_r = 0
     setpoint_pen = 0
@@ -49,7 +63,9 @@ def task_move():
         yield(0)
         
 def task_read():
-    
+    """!
+    Task which parses and stores setpoints in queue
+    """
     values_split = []
     file = open('setpoints.txt', 'r')
     values = file.read()

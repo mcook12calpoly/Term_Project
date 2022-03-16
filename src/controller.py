@@ -1,7 +1,23 @@
+'''! @file      controller.py
+                This program includes functions for the motor controller, moving the machine to setpoints.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 15, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 class Controller:
     
     def __init__ (self, motor_theta, encoder_theta, motor_r, encoder_r, pen, done_flag):
-        
+        '''! 
+        Initializes variables and passes motors, encoders, servo, and shared variable in.
+        @param motor_theta Motor that controls theta axis
+        @param encoder_theta Encoder for theta axis
+        @param motor_r Motor that controls r axis
+        @param encoder_r Encoder for r axis
+        @param pen Pen object
+        @param done_flag Shared variable indicating if last setpoint has been reached
+        '''        
         self.motor_theta = motor_theta
         self.encoder_theta = encoder_theta
         
@@ -13,7 +29,17 @@ class Controller:
         self.pen = pen
         
     def moveto (self, target_theta, speed_theta, target_r, speed_r, target_pen, theta_threshold = 350, r_threshold = 500):
+        '''! 
+        Moves motors to setpoint with a certain speed and threshold
+        @param target_theta Theta axis setpoint
+        @param speed_theta Theta axis speed
+        @param target_r r axis setpoint
+        @param speed_r r axis speed
+        @param target_pen Pen setpoint
+        @param theta_threshold Acceptable threshold(error) from setpoint for theta axis
+        @param r_threshold Acceptable threshold(error) from setpoint for r axis
         
+        '''        
         # thresholds in ticks
         # 4.3125 inches = 112000 ticks
         # 180 degrees = 44000 ticks

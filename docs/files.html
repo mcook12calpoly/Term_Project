@@ -25,9 +25,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Term Project Cook Louie<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Term Project Cook Louie
    </div>
-   <div id="projectbrief">2.5 Axis Plotter</div>
+   <div id="projectbrief">Software Design of 2.5 Axis Plotter</div>
   </td>
  </tr>
  </tbody>
@@ -89,7 +89,19 @@ $(document).ready(function(){initNavTree('files.html',''); initResizable(); });
 <div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
 <div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
 <tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span id="img_0_" class="iconfopen" onclick="toggleFolder('0_')">&#160;</span><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" target="_self">src</a></td><td class="desc"></td></tr>
-<tr id="row_0_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="mainpage_8py.html" target="_self">mainpage.py</a></td><td class="desc">This page describes our software design for a 2.5 axis plotter </td></tr>
+<tr id="row_0_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="controller_8py.html" target="_self">controller.py</a></td><td class="desc">This program includes functions for the motor controller, moving the machine to setpoints </td></tr>
+<tr id="row_0_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="cotask_8py.html" target="_self">cotask.py</a></td><td class="desc">This file contains classes to run cooperatively scheduled tasks in a multitasking system </td></tr>
+<tr id="row_0_2_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="encoder_8py.html" target="_self">encoder.py</a></td><td class="desc">This program includes an encoder class with functions to initialize the encoder, update the encoder reading, return the encoder reading, and zero the encoder </td></tr>
+<tr id="row_0_3_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="gcoderead__v2_8py.html" target="_self">gcoderead_v2.py</a></td><td class="desc">This program opens a stated gcode script, obtains the command and coordiante values from each line and creates a list of setpoints for each motor to move to </td></tr>
+<tr id="row_0_4_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="gcodereadcurve_8py.html" target="_self">gcodereadcurve.py</a></td><td class="desc">This program opens a stated gcode script, obtains the command and coordiante values from each line and creates a list of setpoints for each motor to move to </td></tr>
+<tr id="row_0_5_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="home_8py.html" target="_self">home.py</a></td><td class="desc">This program includes functions for initializing a home class, and sending the motors to their home positions </td></tr>
+<tr id="row_0_6_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="main_8py.html" target="_self">main.py</a></td><td class="desc">This program is the main program for controlling our 2.5 axis pen plotter </td></tr>
+<tr id="row_0_7_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="mainpage_8py.html" target="_self">mainpage.py</a></td><td class="desc">This page describes our software design for a 2.5 axis plotter </td></tr>
+<tr id="row_0_8_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="motordriver_8py.html" target="_self">motordriver.py</a></td><td class="desc">This program includes a MotorDriver class with functions to initialize the correct pins to control the motor along with setting the duty cycle </td></tr>
+<tr id="row_0_9_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="_pen_8py.html" target="_self">Pen.py</a></td><td class="desc">This program includes functions for initializing a Pen state controller, and setting a servo driver to one of two positions </td></tr>
+<tr id="row_0_10_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="servodriver_8py.html" target="_self">servodriver.py</a></td><td class="desc">This program includes functions for the servo </td></tr>
+<tr id="row_0_11_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="switch_8py.html" target="_self">switch.py</a></td><td class="desc">This program includes functions for initializing a switch, and determining the current state of the switch depending on input values </td></tr>
+<tr id="row_0_12_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="task__share_8py.html" target="_self">task_share.py</a></td><td class="desc">This file contains classes which allow tasks to share data without the risk of data corruption by interrupts </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

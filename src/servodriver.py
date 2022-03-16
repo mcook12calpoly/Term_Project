@@ -1,3 +1,11 @@
+'''! @file      servodriver.py
+                This program includes functions for the servo.
+    @author     Michael Cook
+    @author     Derick Louie
+    @date       March 15, 2022
+    @copyright  (c) 2022 by Michael Cook, Derick Louie, and released under GNU Public License v3
+'''
+
 import pyb
 import time
 

@@ -28,9 +28,20 @@ var NAVTREE =
     [ "Term Project", "index.html", [
       [ "Software Design", "index.html#Software_Design", [
         [ "Task Diagram", "index.html#Task_Diagram", null ],
-        [ "User/Main Task FSM", "index.html#User_Task", null ],
-        [ "G-Code to Position Task FSM", "index.html#G_Code", null ],
-        [ "Encoder Task FSM", "index.html#Encoder", null ]
+        [ "Task FSM", "index.html#Move", null ],
+        [ "Encoder Task FSM", "index.html#Encoder", null ],
+        [ "Read Task FSM", "index.html#Read", null ],
+        [ "G-Code to Position Program FSM", "index.html#G_Code", null ]
+      ] ]
+    ] ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -41,7 +52,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_68267d1309a1af8e8297ef4c3efbcdba.html"
+"_pen_8py.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
