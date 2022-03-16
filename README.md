@@ -35,17 +35,11 @@ Link to Doxygen:
 
 ---
 ### Results
-After some initial testing and reworking of our software, the first successful drawing was of a rectangle. Due to the changes made on how the Gcode processing script determines the resolution of each line drawn, which allowed us to get much better looking and consistent long lines, The lines of the rectangle did not display any large zigzags as our device had been producing before the changes. However, the lines were not perfectly aligned and created angles that were not 90 degrees in the rectangle. We believe that this issue was due to the home position of our pen holder relative to the expected origin of our axis.
+After some initial testing and reworking of our software, the first successful drawing was of a rectangle. Due to the changes made on how the Gcode processing script determines the resolution of each line drawn, we were able to get much better looking and consistent long lines. The lines of the rectangle did not display any large zigzags as our device had been producing before the changes. However, the lines were not perfectly aligned and created angles that were not 90 degrees in the rectangle. We believe that this issue was due to the home position of our pen holder relative to the expected origin of our axis.
 
 ---
 ### Lessons Learned
 The combination of 3d printed parts and aluminum tubing for the frame of the machine made the construction very durable for our testing uses and allowed the mechanical side of the machine to run without issue, leaving more time to focus on software.
 We did not initially think to factor in the distance between the pivot(hinge) and the resting home position of the pen in its holder. This would have given us an offset radial value for what should be home or (0,0). This is likely why our rectange did not have straight angles in our testing.
-In addition, we learned quite a bit about task timing and efficiency. Reducing the period of certain tasks such as our move task and read task greatly improved the resolution of our machine, as it took less time for the next setpoint to be ready. If we were to write the code for this machine, one improvement that we would make would be to implement Bresenham's line drawing algorithm, which would better help us calculate setpoints so that the steps in straight lines are less noticable. In addition to this, we would parse the setpoints and load them into memory before the machine runs, instead of parsing the setpoints each time the read task is called. This would likely improve the performance of our program, allowing us to run at finer setpoint resolutions. 
-
----
-### etc
-
-
-
+In addition, we learned quite a bit about task timing and efficiency. Reducing the period of certain tasks such as our move task and read task greatly improved the resolution of our machine, as it took less time for the next setpoint to be ready. If we were to write the code for this machine, one improvement that we would make would be to implement Bresenham's line drawing algorithm, which would better help us calculate setpoints so that the steps in straight lines are less noticable. In addition to this, we would parse the setpoints and load them into memory before the machine runs, instead of parsing the setpoints each time the read task is called. This would likely improve the performance of our program, allowing us to run at finer setpoint resolutions. Although we didn't experience any issues with sensor resolution, their effect(especially on the wheel) could be noticable with better code performance. A potentiometer could be implemented on the pivot of the arms, which would allow for better accuracy and negate any error from wheel slippage.
 ---
