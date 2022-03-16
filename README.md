@@ -14,10 +14,10 @@ For this term project, a 2.5 axis plotting machine was contructed using a pivoti
 |  5   | Hobby Micro Servo     | Amazon&trade;         |   $8.99   |
 |  1   | 400mm Lead Screw      | Amazon&trade;         |   $12.99  |
 |  1   | 96" Square Metal Tube | Home Depot&trade;     |   $22.26  |
-|  1   | Black Sharpie&trade;  | STAPLES&trade;        |   $1.29   |
+|  1   | Triplus Fineliner Pen | Already Owned         |   $1.29   |
 |  1   | Chassis for servo/pen | 3D Printer            |     -     |
 |  1   | Limit Switch          | Already Owned         |     -     |
-|  2   | 3" Wheel              | 3D Printer            |     -     |
+|  2   | Wheel              | 3D Printer            |     -     |
 
 
 ---
